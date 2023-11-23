@@ -12,6 +12,8 @@ from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
 
+from src.components.data_ingestion import DataIngestion
+
 @dataclass
 class DataTransformationconfig:
     preprocessor_obj_file_path=os.path.join("artifacts","preprocessor.pkl")
@@ -74,6 +76,51 @@ class DataTransformation:
 
             logging.info("obtaining preprocessor object")
             preprocessing_obj=self.get_data_transformed_object()
+
+            target_column_name="Exited"
+            drop_columns=[target_column_name,"RowNumber","CustomerId","Surname","Geography"]
+
+            logging.info("columns droped")
+            
+            input_feature_train_df=train_df.drop(columns=drop_columns,axis=1)
+            target_feature_train_df=train_df[target_column_name]
+
+            input_feature_test_df=test_df.drop(columns=drop_columns,axis=1)
+            target_feature_test_df=test_df[target_column_name]
+
+            ## transforming using preprocessor object
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr=preprocessing_obj.fit_transform(input_feature_test_df)
+
+            logging.info("applied preprocessing object on train and test data")
+
+            # concatnating train and test arr
+            train_arr=np.c_[input_feature_train_arr,np.array(target_feature_train_df)]
+            test_arr=np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
+            save_object(
+                file_path=self.data_transformation_config.preprocessor_obj_file_path,
+                obj=preprocessing_obj
+            )
+            logging.info("preprocessing file saved")
+            
+            return(
+                train_arr,
+                test_arr,
+                self.data_transformation_config.preprocessor_obj_file_path
+
+            )
+        except Exception as e:
+            logging.info("error occurs in data trainformation ")
+            raise CustomException(e,sys)
+        
+# if __name__=="main":
+#     obj=DataIngestion()
+#     train_data_path,test_data_path=obj.initiate_data_ingestion()
+#     obj_data_transformation=DataTransformation()
+#     train_arr,test_arr,_=obj_data_transformation.initiate_data_transformation(train_data_path,test_data_path)
+
+
+
 
             
 
