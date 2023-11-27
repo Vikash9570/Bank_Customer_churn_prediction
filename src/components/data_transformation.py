@@ -10,7 +10,7 @@ import os
 from src.utils import save_object
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
-from sklearn.base import BaseEstimator, TransformerMixin
+# from sklearn.base import BaseEstimator, TransformerMixin
 
 from src.components.data_ingestion import DataIngestion
 
@@ -113,7 +113,7 @@ class DataTransformation:
             logging.info("error occurs in data trainformation ")
             raise CustomException(e,sys)
         
-# if __name__=="main":
+# if __name__=="__main__":
 #     obj=DataIngestion()
 #     train_data_path,test_data_path=obj.initiate_data_ingestion()
 #     obj_data_transformation=DataTransformation()
