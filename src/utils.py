@@ -3,7 +3,8 @@ import sys
 import pickle
 import numpy as np 
 import pandas as pd
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+from sklearn.metrics import confusion_matrix,fbeta_score
+
 
 from src.exception import CustomException
 from src.logger import logging
@@ -24,6 +25,7 @@ def save_object(file_path, obj):
 def evaluate_model(X_train,y_train,X_test,y_test,models):
     try:
         report:dict = {}
+        report_confusion_matrix:dict={}
         for i in range(len(models)):
             model = list(models.values())[i]
             # train models
@@ -32,12 +34,14 @@ def evaluate_model(X_train,y_train,X_test,y_test,models):
             # pridction testing data
             y_test_pred=model.predict(X_test)
 
-            # get r2 score for train and test data
-            test_model_score=r2_score(y_test,y_test_pred)
+            # get confusion matrix and precision, recall, f score 
+            test_model_score=fbeta_score(y_test,y_test_pred)
+            
 
             report[list(models.keys())[i]]=test_model_score
+            report_confusion_matrix[list(models.keys())[i]]=confusion_matrix(y_test,y_test_pred)
 
-            return report
+            return report, report_confusion_matrix
         
     except Exception as e:
         logging.info("Exception occured during model training")
