@@ -44,9 +44,8 @@ class ModelTrainer:
 
             model_report,confusion_matrix=evaluate_model(X_train,y_train,X_test,y_test,models)
             print(model_report)
-            print("\n")
             print(confusion_matrix)
-            print("\n="*20,"\n")
+            print("\n==========================================================================")
             logging.info(f'model report :{model_report}')
             logging.info(f'confusion matrix :{confusion_matrix}')
 
@@ -57,7 +56,7 @@ class ModelTrainer:
 
             print(f'best model name :{best_model_name} and model fb score is :{best_model_score}')
             print("\n==========================================================================\n")
-            logging.info(f'best model name :{best_model_name} and model fbscore is :{best_model_score}')
+            logging.info(f'best model name :{best_model_name} and model accuracy is :{best_model_score}')
             
 
             best_model=models[best_model_name]

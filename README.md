@@ -1,24 +1,21 @@
-## End to End ML Project
+## Bank Customer Churn Prediction
+### Overview
+The Bank Churn Prediction project is designed to predict customer churn in a bank. Churn prediction is critical for customer retention strategies, as it helps banks identify customers who are likely to leave and take preemptive measures to retain them. This project uses machine learning algorithms to analyze customer data and predict the likelihood of churn.
 
-## Info about Dataset
-```
-In this Bank Customer Churn prediction data set have attributed (CreditScore,Gender,Age,Tenure,Balance,NumOfProducts,HasCrCard,IsActiveMember,EstimatedSalary,Exited).
-where Exited is predicting feature.
-```
-## info about project
-```
-This project is implemented by using MLOps:
-* Data Injestion
-* Data Transformation
-* Model Evaluation / Model Selection
-* CI/CD in AWS with the help of github Workflows 
-```
-### created a environment
-```
-conda create -p venv python==3.10
-```
-### Install all necessary libraries
-```
+### Features
+1. Data Preprocessing: Cleans and preprocesses raw customer data for analysis.
+2. Exploratory Data Analysis (EDA): Provides insights into the data through visualizations and statistical summaries.
+3. Feature Engineering: Creates relevant features to improve model performance.
+4. Model Training: Trains various machine learning models to predict churn.
+5. Model Evaluation: Evaluates models using metrics Fbeta score
+6. Prediction: Generates churn predictions for new customer data.
+
+### Installation
+1. Clone the repository:
+git clone https://github.com/yourusername/Bank_Customer_Churn_Prediction.git
+
+2. Navigate to the project directory:
+cd CHURN_PREDICTION_PROJECT
+
+3. Install the required dependencies:
 pip install -r requirements.txt
-```
-

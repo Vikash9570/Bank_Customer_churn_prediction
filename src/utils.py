@@ -3,7 +3,7 @@ import sys
 import pickle
 import numpy as np 
 import pandas as pd
-from sklearn.metrics import confusion_matrix,fbeta_score
+from sklearn.metrics import confusion_matrix,precision_score,accuracy_score
 
 
 from src.exception import CustomException
@@ -35,7 +35,7 @@ def evaluate_model(X_train,y_train,X_test,y_test,models):
             y_test_pred=model.predict(X_test)
 
             # get confusion matrix and precision, recall, f score 
-            test_model_score=fbeta_score(y_test,y_test_pred)
+            test_model_score=accuracy_score(y_test,y_test_pred)
             
 
             report[list(models.keys())[i]]=test_model_score

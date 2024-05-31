@@ -25,7 +25,7 @@ class DataIngestion:
         try:
             df=pd.read_csv(os.path.join("notebook/data","Churn_Modelling.csv"))
             logging.info("dataset read as pandas dataframe")
-            os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path,index=False,exist_ok=True))
+            os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
             df.to_csv(self.ingestion_config.raw_data_path,index=False)
             
             logging.info("Train Test Split")
